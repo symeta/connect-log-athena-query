@@ -1,7 +1,7 @@
 # connect-log-athena-query
 
 
-## DDL in Athena
+## DDL via Athena Console
 
 - raw data (bc4.json) mapping table b_connect 
 
@@ -47,7 +47,7 @@ LOCATION
 ```
 
 
-## DML in Athena
+## DML via Athena Console
 
 - insert data from raw data table into relationalized table
 
