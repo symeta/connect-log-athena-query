@@ -19,10 +19,11 @@ CREATE EXTERNAL TABLE `b_connect`(
 ROW FORMAT SERDE 
   'org.openx.data.jsonserde.JsonSerDe' 
 LOCATION
-  's3://ab-23-data/b/'
+  's3://<bucket name>/b/'
 ```
 
 - relationalized table for field 'Transcript' named as b_relationalize_full_transcript
+- same operation could be done towards field 'Participants'
 
 ```SQL
 create external table `b_relationalize_full_transcript` (
@@ -42,8 +43,9 @@ create external table `b_relationalize_full_transcript` (
 ROW FORMAT SERDE 
   'org.apache.hadoop.hive.serde2.OpenCSVSerde' 
 LOCATION
-  's3://ab-23-data/b_relationalize_full_transcript/'
+  's3://<bucket name>/b_relationalize_full_transcript/'
 ```
+
 
 ## DML in Athena
 
@@ -63,7 +65,7 @@ select Version,
        transcript[1].ParticipantId,
        transcript[1].DisplayName,
        transcript[1].ParticipantRole
-from default.bbae_connect10
+from default.b_connect
 
 
 insert into default.b_relationalize_full_transcript
@@ -79,7 +81,7 @@ select Version,
        transcript[2].ParticipantId,
        transcript[2].DisplayName,
        transcript[2].ParticipantRole
-from default.bbae_connect10
+from default.b_connect
 
 insert into default.b_relationalize_full_transcript
 select Version,
@@ -94,7 +96,7 @@ select Version,
        transcript[3].ParticipantId,
        transcript[3].DisplayName,
        transcript[3].ParticipantRole
-from default.bbae_connect10
+from default.b_connect
 
 ... ...
 ```
